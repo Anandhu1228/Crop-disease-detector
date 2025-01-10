@@ -1,0 +1,264 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Disease Detector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
+            position: relative;
+            top: -50px;
+            color: rgb(255, 255, 255);
+        }
+
+        .title_short{
+            font-family: 'Orbitron', sans-serif;
+            font-size: 25px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
+            position: relative;
+            top: -50px;
+            color: rgb(255, 255, 255);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px 90px;
+            margin-top: 5px;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .grid-item img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item img:hover {
+            transform: scale(1.1);
+        }
+
+        .grid-item span {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        .crop_name{
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
+            letter-spacing: 2px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
+            letter-spacing: 2px;
+            z-index: 9999;
+        }
+
+        @media (max-width: 1074px) {
+            .title {
+                font-size: 30px;
+            }
+            .title_short {
+                font-size: 23px;
+            }
+        }
+
+        @media (max-width: 670px) {
+            .grid{
+                gap: 25px 30px;
+            }
+        }
+
+        @media (max-width: 556px) {
+            .title {
+                font-size: 24px;
+                top:40px;
+                position: absolute;
+                margin-bottom: 20px;
+            }
+            .title_short {
+                font-size: 17px;
+                top:90px;
+                position: absolute;
+                margin-bottom: 20px;
+            }
+
+            .grid{
+                gap: 25px 30px;
+                grid-template-columns: repeat(2, 1fr);
+                padding-bottom: 100px;
+                margin-top: 200px;
+            }
+
+            body{
+                overflow: auto;
+            }
+            .footer {
+                position: relative;
+                bottom: 25px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .title {
+                font-size: 20px;
+            }
+            .title_short {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .grid{
+                gap: 20px 25px;
+                padding-top: 520px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="overlay"></div>
+    <video class="background-video" autoplay muted loop>
+        <source src="/images/BACKGROUND.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="title">CROP DISEASE DETECTOR</div>
+    <div class="title_short">CHOOSE THE CROP</div>
+
+    <div class="grid">
+        <div class="grid-item">
+            <form action="/get_plant" method="POST">
+                <button type="submit" name="plant" value="1" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="/images/POTATO.jpg" alt="Plant 1">
+                </button>
+            </form>
+            <span class="crop_name">POTATO</span>
+        </div>
+
+        <div class="grid-item">
+            <form action="/get_plant" method="POST">
+                <button type="submit" name="plant" value="2" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="/images/PEPPER.jpg" alt="Plant 2">
+                </button>
+            </form>
+            <span class="crop_name">PEPPER</span>
+        </div>
+
+        <div class="grid-item">
+            <form action="/get_plant" method="POST">
+                <button type="submit" name="plant" value="3" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="/images/CHERRY.jpg" alt="Plant 3">
+                </button>
+            </form>
+            <span class="crop_name">CHERRY</span>
+        </div>
+
+        <div class="grid-item">
+            <form action="/get_plant" method="POST">
+                <button type="submit" name="plant" value="4" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="/images/PEACH.jpg" alt="Plant 4">
+                </button>
+            </form>
+            <span class="crop_name">PEACH</span>
+        </div>
+
+        <div class="grid-item">
+            <form action="/get_plant" method="POST">
+                <button type="submit" name="plant" value="5" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="/images/RICE.jpg" alt="Plant 5">
+                </button>
+            </form>
+            <span class="crop_name">RICE</span>
+        </div>
+
+        <div class="grid-item">
+            <form action="/get_plant" method="POST">
+                <button type="submit" name="plant" value="6" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="/images/STRAWBERRY.jpg" alt="Plant 6">
+                </button>
+            </form>
+            <span class="crop_name">STRAWBERRY</span>
+        </div>
+
+        <div class="grid-item">
+            <form action="/get_plant" method="POST">
+                <button type="submit" name="plant" value="7" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="/images/CORN.jpg" alt="Plant 7">
+                </button>
+            </form>
+            <span class="crop_name">CORN</span>
+        </div>
+
+        <div class="grid-item">
+            <form action="/get_plant" method="POST">
+                <button type="submit" name="plant" value="8" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="/images/GRAPE.jpg" alt="Plant 8">
+                </button>
+            </form>
+            <span class="crop_name">GRAPE</span>
+        </div>
+
+        <div class="grid-item">
+            <form action="/get_plant" method="POST">
+                <button type="submit" name="plant" value="9" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="/images/SUGARCANE.jpg" alt="Plant 9">
+                </button>
+            </form>
+            <span class="crop_name">SUGARCANE</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        Created by Anandhu ©
+    </div>
+</body>
+
+
